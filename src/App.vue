@@ -30,7 +30,7 @@ export default {
           this.$router.push('/Game1')
         break;
         case 1:
-        // this.$router.push('/Game2')
+          this.$router.push('/Game2')
         break;
         default:
           this.nowdress = '/'
