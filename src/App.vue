@@ -53,55 +53,40 @@ export default {
 
 <template>
   <div class="goods">
-    <!-- <van-nav-bar title="标题" left-arrow fixed>
-      <template #left>
-        <van-icon name="wap-home-o" size="18" />
-      </template>
-      <template #right>
-        <van-icon name="search" size="18" @click = "()=>{searchoverlay = true;searchtext = ''}"/>
-      </template>
-    </van-nav-bar> -->
-    <div v-if="nowdress !== 'home'" class = "router" >
+    <div v-if="nowdress !== 'home'" class = "main-router" >
       <Game :address = "nowdress" />
       <RouterView/>
       <van-floating-bubble axis="xy" magnetic="x" icon="wap-home-o" @click="show('home')" />
     </div>
+
     <main v-if="nowdress === 'home'" class="goods-main">
-
-      <van-overlay :show="searchoverlay" @click="searchoverlay = false" class="search">
-        <div @click.stop>
-          <van-search v-model="searchtext" placeholder="请输入搜索关键词" @search="onSearch(searchtext)"/>
+      <header class="goods-head">
+        <div class="goods-head-title1">
+          <van-image class = "goods-head-title1-icon" fit="cover" lazy-load :src=imageSrc />
+          <van-icon class="goods-head-title1-search" name="search" size="18" @click = "()=>{searchoverlay = true;searchtext = ''}"/>
         </div>
-      </van-overlay>
-      
-      <van-sticky :offset-top="10">
-          <div class="title" >
-            <van-image class="title-main" lazy-load :src=imageSrc />
-            <van-icon class="goods-sidecontainer" name="search" size="18" @click = "()=>{searchoverlay = true;searchtext = ''}"/>
+        <div class="goods-head-title2">
+          <!-- <van-icon class = "goods-head-title2-icon" name="search" size="18" @click = "()=>{searchoverlay = true;searchtext = ''}" />
+          <van-icon class="goods-head-title2-search" name="search" size="18" @click = "()=>{searchoverlay = true;searchtext = ''}"/> -->
+        </div>
+      </header>
+      <div class="goods-group">
+        <van-overlay :show="searchoverlay" @click="searchoverlay = false" style="z-index: 100">
+          <div @click.stop>
+            <van-search v-model="searchtext" placeholder="请输入搜索关键词" @search="onSearch(searchtext)"/>
           </div>
-      </van-sticky>
+        </van-overlay>
 
-      <div class="goods-image" v-for="item in list" :key="item" >
-        <van-image width="100%" height="100%" radius="8" lazy-load :src=imageSrc @mouseenter="chooseitem(item)" @mouseend = "cleanitem(item)"  @touchstart ="chooseitem(item)" @touchend = "cleanitem(item)"  @click="show(item)">
-          <div v-if="nowchoose === item" class="goods-image-div" >
-            {{ item }}
-          </div>
-        </van-image>
+        <div class="goods-image" v-for="item in list" :key="item" >
+          <van-image width="100%" height="100%" radius="8" lazy-load :src=imageSrc @mouseenter="chooseitem(item)" @mouseend = "cleanitem(item)"  @touchstart ="chooseitem(item)" @touchend = "cleanitem(item)"  @click="show(item)">
+            <div v-if="nowchoose === item" class="goods-image-div" >
+              {{ item }}
+            </div>
+          </van-image>
+        </div>
+        <van-back-top />
       </div>
-      <van-back-top />
     </main>
-
-    <!-- <van-tabbar v-model = "active"  @change="onChange">
-      <van-tabbar-item icon="wap-home-o">
-        首页
-      </van-tabbar-item>
-      <van-tabbar-item icon="search">
-        分类·发现
-      </van-tabbar-item>
-      <van-tabbar-item icon="contact-o">
-        我的
-      </van-tabbar-item>
-    </van-tabbar> -->
   </div>
 </template>
 
@@ -110,43 +95,6 @@ body {
   font-size: 16px;
   background-color: #f8f8f8;
   -webkit-font-smoothing: antialiased;
-}
-
-.router{
-  width: 100%;  
-  height: 100%;
-  position: absolute;
-  &-home{
-    position: absolute;
-    width: 100px;
-    height: 100px;
-    padding: 0;
-    border-radius: 8px;
-    bottom: 0;
-  }
-}
-.search{
-  z-index: 100;
-}
-
-.title{
-  display: flex;
-  flex-direction: column; /* 设置为垂直方向 */
-  width: 100px;
-  height: 100px;
-  padding: 0;
-  border-radius: 8px;
-  background: linear-gradient(to top, rgb(1, 88, 187), rgb(0, 117, 252)); /* 半透明背景 */
-  &-main{
-    flex: 2; /* 占 2/3 的宽度 */
-    background-color: #4CAF50;
-    object-fit:cover;
-  }
-  &-sidecontainer{
-      flex: 1; /* 占 1/3 的宽度 */
-      display: flex;
-      object-fit:cover;
-  }
 }
 
 .goods {
@@ -169,7 +117,44 @@ body {
       color: white; /* 根据需要设置颜色 */
     }
   }
+  &-router{
+    width: 100%;  
+    height: 100%;
+    position: absolute;
+  }
+  &-head{
+    width: 100%;
+    height: 160px;
+    background-color: #002f5c;
+    &-title1{
+      width: 100%;
+      height: 96px;
+      background-color: #0060b9;
+      &-icon{
+        width: 222px;
+        height: 40px;
+        position: absolute;
+        top: 28px;
+        left: 24px;
+      }
+      &-search{
+        width: 20px;
+        height: 20px;
+        position: absolute;
+        top: 10px;
+        right: 10px;
+      }
+    }
+    &-title2{
+      width: 100%;
+      height: 64px;
+      background-color: #0076e4;
+    }
+  }
   &-main {
+    width: 100%;
+  }
+  &-group {
     width: 96%;  
     display: grid;
     grid-template-columns: repeat(auto-fit, 100px); /* 自适应，均等宽度 */
@@ -177,6 +162,5 @@ body {
     padding: 10px 2%;
     justify-content: center; /* 水平居中对齐 */
   }
-
 }
 </style>
