@@ -6,7 +6,7 @@ import Game from './components/Game.vue';
 
 export default {
   components: {
-    Game1
+    Game
   },
   data() {
     const list = [...Array(50).keys()];
