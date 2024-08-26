@@ -1,11 +1,11 @@
 import { createWebHashHistory, createRouter } from 'vue-router'
 
-import Game1 from '../components/Game1.vue'
+import Game from '../components/Game.vue'
 import App from '../App.vue'
 
 const routes = [
     { path: '/', component: App },
-    { path: '/Game1', component: Game1 },
+    { path: '/Game', component: Game },
 ]
 
 const router = createRouter({

@@ -2,15 +2,19 @@
 import { showToast } from 'vant';
 import { ref } from 'vue';
 import image from './assets/moa.svg';
+import Game from './components/Game.vue';
 
 export default {
+  components: {
+    Game1
+  },
   data() {
     const list = [...Array(50).keys()];
     const active = ref(0)
     const nowchoose = ref(-1)
     const searchoverlay = ref(false)
     const searchtext = ref('')
-    const nowdress = ref('/')
+    const nowdress = ref('home')
     const onChange = (index) => showToast(`标签 ${index}`);
     return { list, active ,nowchoose,searchoverlay,searchtext,nowdress,onChange,imageSrc: image};
   },
@@ -26,15 +30,17 @@ export default {
       showToast(`标签 ${index}`);
       switch (index){
         case 0:
-          this.nowdress = '/Game1'
+          this.nowdress = 'http://121.40.242.50:8999/'
           this.$router.push('/Game1')
         break;
         case 1:
-          this.nowdress = '/Game2'
-          this.$router.push('/Game2')
+          this.nowdress = 'http://121.40.242.50:9000/'
+          this.$router.push('/Game1')
+          // this.nowdress = '/Game2'
+          // this.$router.push('/Game2')
         break;
         default:
-          this.nowdress = '/'
+          this.nowdress = 'home'
           this.$router.push('/')
       }
     },
@@ -55,11 +61,12 @@ export default {
         <van-icon name="search" size="18" @click = "()=>{searchoverlay = true;searchtext = ''}"/>
       </template>
     </van-nav-bar> -->
-    <div v-if="nowdress !== '/'" class = "router" >
+    <div v-if="nowdress !== 'home'" class = "router" >
+      <Game :address = "nowdress" />
       <RouterView/>
-      <van-floating-bubble axis="xy" magnetic="x" icon="wap-home-o" @click="show('/')" />
+      <van-floating-bubble axis="xy" magnetic="x" icon="wap-home-o" @click="show('home')" />
     </div>
-    <main v-if="nowdress === '/'" class="goods-main">
+    <main v-if="nowdress === 'home'" class="goods-main">
 
       <van-overlay :show="searchoverlay" @click="searchoverlay = false" class="search">
         <div @click.stop>
