@@ -57,6 +57,7 @@ function changepage(index){
   activeuse.value = false
   if(index == 0){
     nowdress.value = 'home'
+    active.value = '0'
     router.push('/')
   }
 }
@@ -93,6 +94,7 @@ function onSearch(value){
 
 <template>
   <div class="goods">
+    <van-back-top />
 <!--额外页面框------------------------------------------------------------------------------------- -->
     <div v-if="nowdress !== 'home'" class = "main-router" >
       <Game :address = "nowdress" />
@@ -101,22 +103,25 @@ function onSearch(value){
       </RouterView>
     </div>
 <!--搜索页------------------------------------------------------------------------------------- -->
-    <van-overlay :show="searchoverlay" @click="searchoverlay = false" style="z-index: 100">
+    <div v-if="searchoverlay === true" @click="searchoverlay = false" style="z-index: 100; position:absolute; width: 100%; height: 100%;">
       <div @click.stop>
-        <van-search v-model="searchtext" show-action shape="round" background="#2d9bff" placeholder="请输入搜索关键词" @search="onSearch(searchtext)" @cancel="searchoverlay = false,searchtext='',searchData=[]"/>
-          <div class="goods-group">
-            <div class="goods-group-slot" v-for="item in searchData" :key="item.id" @click="show(item)">
-                <div class="goods-group-slot-icon">
+        <div style="width: 100%;height:54px;background:#2d9bff;">
+          <van-icon name="arrow-left" size=26 style="padding: 14px 0;padding-left: 6px;float: left;"  @click="searchoverlay = false,searchtext='',searchData=[]" />
+          <div @click="onSearch(searchtext)" style="width: 40px;height: 54px;padding-right: 14px; float: right;display: flex; align-items: center; justify-content: center;"> Search </div>
+          <van-search v-model="searchtext" style="width: 80%;" shape="round" background="#2d9bff" action-text="Search" placeholder="Please enter search keywords" @search="onSearch(searchtext)"/>
+        </div>        
+        <div class="goods-group">
+          <div class="goods-group-slot" v-for="item in searchData" :key="item.id" @click="show(item)">
+              <div class="goods-group-slot-icon">
                   <van-image radius="8px" fit="cover" lazy-load :src= item.Icon_Address />
-                </div>
-                <div class="goods-group-slot-text">
+              </div>
+              <div class="goods-group-slot-text">
                   {{ item.Name_EN }}
-                </div>
-            </div>
-            <van-back-top />
-          </div>
+              </div>
+          </div> 
+        </div>
       </div>
-    </van-overlay>
+    </div>
 <!--左侧展开栏------------------------------------------------------------------------------------- -->
     <van-popup v-model:show="activeuse" @click="activeuse=false" position="left" class="goods-active">
       <div @click.stop style="padding: 18px 0">
@@ -133,7 +138,7 @@ function onSearch(value){
         <div class="goods-head-title1">
           <van-image class = "goods-head-title1-icon" fit="cover" lazy-load :src=logo />
           <div class = "goods-head-title1-search" >
-            <van-search v-model="searchtext" background="#2d9bff" shape="round" placeholder="请输入搜索关键词" @click="searchoverlay = true" />
+            <van-search v-model="searchtext" background="#2d9bff" shape="round" placeholder="Please enter search keywords" @click="searchoverlay = true" />
           </div>
         </div>
         <div class="goods-head-title2">
@@ -284,6 +289,8 @@ body {
   }
   &-group {
     width: 96%;  
+    height: 75vh;   
+    background-color: #f8f8f8;
     display: grid;
     grid-template-columns: repeat(3, 1fr); /* 自适应，均等宽度 */
     gap: 10px; /* 列之间的间隙 */
