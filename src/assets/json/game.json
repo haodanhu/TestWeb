@@ -1,0 +1,45 @@
+{
+  "1": {
+    "id": "1",
+    "Name_CN": "尸兄好猛",
+    "Name_EN": "Zombies Fierce",
+    "Tag_EN": [
+      1,
+      2,
+      14,
+      15
+    ],
+    "Tag_CN": [
+      1,
+      2,
+      14,
+      15
+    ],
+    "Icon_Address": "https://i.postimg.cc/zvSp4Kc5/20240819-163544.png",
+    "Game_Address": "http://121.40.242.50:8999/"
+  },
+  "2": {
+    "id": "2",
+    "Name_CN": "超级解压馆",
+    "Name_EN": "Super Decompression Hall",
+    "Tag_EN": [
+      9,
+      17
+    ],
+    "Tag_CN": [
+      9,
+      17
+    ],
+    "Icon_Address": "https://i.postimg.cc/zvSp4Kc5/20240819-163544.png",
+    "Game_Address": "http://121.40.242.50:9000/"
+  },
+  "null": {
+    "id": null,
+    "Name_CN": null,
+    "Name_EN": null,
+    "Tag_EN": null,
+    "Tag_CN": null,
+    "Icon_Address": null,
+    "Game_Address": null
+  }
+}
