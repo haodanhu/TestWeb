@@ -1,0 +1,74 @@
+{
+  "1": {
+    "id": "1",
+    "tag": "Action"
+  },
+  "2": {
+    "id": "2",
+    "tag": "Adventure"
+  },
+  "3": {
+    "id": "3",
+    "tag": "RPG"
+  },
+  "4": {
+    "id": "4",
+    "tag": "Shooter"
+  },
+  "5": {
+    "id": "5",
+    "tag": "Strategy"
+  },
+  "6": {
+    "id": "6",
+    "tag": "Simulation"
+  },
+  "7": {
+    "id": "7",
+    "tag": "Sports"
+  },
+  "8": {
+    "id": "8",
+    "tag": "Racing"
+  },
+  "9": {
+    "id": "9",
+    "tag": "Puzzle"
+  },
+  "10": {
+    "id": "10",
+    "tag": "Music"
+  },
+  "11": {
+    "id": "11",
+    "tag": "Fighting"
+  },
+  "12": {
+    "id": "12",
+    "tag": "Horror"
+  },
+  "13": {
+    "id": "13",
+    "tag": "Sandbox"
+  },
+  "14": {
+    "id": "14",
+    "tag": "Survival"
+  },
+  "15": {
+    "id": "15",
+    "tag": "Tower Defense"
+  },
+  "16": {
+    "id": "16",
+    "tag": "MMO"
+  },
+  "17": {
+    "id": "17",
+    "tag": "Casual"
+  },
+  "null": {
+    "id": null,
+    "tag": null
+  }
+}
