@@ -43,10 +43,38 @@ const searchoverlay = ref(false)
 const searchtext = ref('')
 const nowdress = ref('home')
 const searchData = ref([])
-
+const isFullScreen = false;
+function enterFullScreen(){
+  const element = document.documentElement; // 或者你可以选择其他元素来全屏
+  if (element.requestFullscreen) {
+    element.requestFullscreen();
+  } else if (element.mozRequestFullScreen) { // Firefox
+    element.mozRequestFullScreen();
+  } else if (element.webkitRequestFullscreen) { // Chrome, Safari and Opera
+    element.webkitRequestFullscreen();
+  } else if (element.msRequestFullscreen) { // IE/Edge
+    element.msRequestFullscreen();
+  }
+  isFullScreen = true;
+}
+function exitFullScreen() {
+  if (document.exitFullscreen){
+    document.exitFullscreen();
+  } else if (document.mozCancelFullScreen) { // Firefox
+    document.mozCancelFullScreen();
+  } else if (document.webkitExitFullscreen) { // Chrome, Safari and Opera
+    document.webkitExitFullscreen();
+  } else if (document.msExitFullscreen) { // IE/Edge
+    document.msExitFullscreen();
+  }
+  isFullScreen = false;
+}
 function show(tbl){
   showToast(`开始游戏 ${tbl.Name_CN}`);
   nowdress.value = tbl.Game_Address
+  if (!isFullScreen){
+    enterFullScreen()
+  }
   router.replace({ query:{Game:tbl.Name_EN} })
   // showToast(route.fullPath);
 }
@@ -57,6 +85,9 @@ function changepage(index){
   activeuse.value = false
   if(index == 0){
     nowdress.value = 'home'
+    if (isFullScreen){
+      exitFullScreen()
+    }
     active.value = '0'
     router.push('/')
   }
@@ -90,6 +121,7 @@ function onSearch(value){
   }
   // console.log("searchData",searchData.value);
 }
+
 </script>
 
 <template>
